@@ -13,9 +13,13 @@ export class PorCapitalComponent {
   hayError : boolean   = false;
   paises   : Country[] = [];
 
+  paisesSugeridos: Country[] = [];
+  mostrarSugerencias: boolean = false;
+
   constructor ( private paisService: PaisService ) {}
 
   buscar( termino: string ) {
+    this.mostrarSugerencias = false;
     this.hayError = false;
     this.termino = termino;
 
@@ -38,7 +42,19 @@ export class PorCapitalComponent {
   }
 
   sugerencias( termino: string ) {
+    this.mostrarSugerencias = true;
     this.hayError = false;
+    this.termino = termino;
+    this.paisesSugeridos = [];
+
+    if (termino.trim().length == 0){ return }
+
+    this.paisService.buscarCapital( termino )
+      .subscribe((resp) => 
+      this.paisesSugeridos = resp.splice(0,5),
+      (err) => this.paisesSugeridos = []
+      );
   }
+  
 
 }

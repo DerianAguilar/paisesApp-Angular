@@ -23,8 +23,7 @@ import { PaisInputComponent } from './components/pais-input/pais-input.component
   ],
   exports:[
     PorCapitalComponent,
-    PorPaisComponent,
-    PorRegionComponent
+    PorPaisComponent
   ],
   imports: [
     CommonModule,
